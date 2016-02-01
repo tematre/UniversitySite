@@ -1,0 +1,10 @@
+bin
+/.vs
+/DAL/obj/Debug
+/DALContracts/obj/Debug
+/Database/obj/Debug
+/Domain/obj/Debug
+/DTO/obj/Debug
+/NinjectInitializer/obj/Debug
+/packages
+/UniversitySite/obj/Debug

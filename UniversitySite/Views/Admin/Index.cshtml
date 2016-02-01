@@ -1,0 +1,32 @@
+﻿@using System.Web.Mvc.Html
+@using Microsoft.AspNet.Identity
+@model  UniversitySite.ViewModels.AdminReportViewModel
+@{
+    ViewBag.Title = "Admin report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section scripts {
+
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("/Scripts/jquery.unobtrusive-ajax.js")
+
+    @Scripts.Render("/Scripts/admin/index.js")
+
+}
+
+@{
+    const string colClass = "col-md-6";
+}
+<p class="text-success">@ViewBag.StatusMessage</p>
+<p>You logged in as <strong>@User.Identity.GetUserName()</strong>.</p>
+<div class="row" id="changePasswordDiv">
+    <div class="@colClass">
+        @Html.Partial("_adminReports")
+    </div>
+    <div class="@colClass">
+
+        @Html.Partial("_adminProfessorsEditor")
+    </div>
+</div>

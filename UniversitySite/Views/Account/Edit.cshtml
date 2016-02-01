@@ -1,0 +1,50 @@
+﻿@using System.Web.Mvc.Html
+@using Microsoft.AspNet.Identity
+@model UniversitySite.ViewModels.EditViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section scripts {
+   
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("/Scripts/jquery.unobtrusive-ajax.js")
+    @Scripts.Render("/Scripts/DataTables/jquery.dataTables.js")
+
+    @if (Model.Professor != null)
+    {
+        @Scripts.Render("/Scripts/account/edit-professor.js")
+    }
+    @if (Model.Student != null)
+    {
+        @Scripts.Render("/Scripts/account/edit-student.js")
+    }
+
+}
+
+@helper RenderManagingInfo()
+{
+if (Model.Student != null)
+{
+        @Html.Partial("_editStudent", Model.Student)
+}
+else if (Model.Professor != null)
+{
+        @Html.Partial("_editProfessor", Model.Professor)
+}
+}
+@{
+    const string colClass = "col-md-6";
+}
+<p class="text-success">@ViewBag.StatusMessage</p>
+<p>You logged in as <strong>@User.Identity.GetUserName()</strong>.</p>
+<div class="row" >
+    <div class="@colClass" id="changePasswordDiv">
+        @Html.Partial("_changePassword", Model.ChangePasswordViewModel)
+    </div>
+    <div class="@colClass" >
+        @RenderManagingInfo()
+    </div>
+</div>

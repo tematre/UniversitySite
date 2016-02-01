@@ -5,14 +5,14 @@ namespace Domain.University
 {
     public class Mark
     {
-
         public Guid Id { get; set; }
 
         public string StudentId { get; set; }
         public Guid SubjectId { get; set; }
 
         [Column(TypeName = "datetime2")]
-        public System.DateTime Date { get; set; }
+        public DateTime Date { get; set; }
+
         [Column("Mark")]
         public int Value { get; set; }
 

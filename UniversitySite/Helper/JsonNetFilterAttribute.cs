@@ -12,19 +12,19 @@ namespace UniversitySite.Helper
             if (filterContext.Result is JsonResult == false)
                 return;
 
-            filterContext.Result = new CustomJsonResult((JsonResult)filterContext.Result);
+            filterContext.Result = new CustomJsonResult((JsonResult) filterContext.Result);
         }
 
         private class CustomJsonResult : JsonResult
         {
             public CustomJsonResult(JsonResult jsonResult)
             {
-                this.ContentEncoding = jsonResult.ContentEncoding;
-                this.ContentType = jsonResult.ContentType;
-                this.Data = jsonResult.Data;
-                this.JsonRequestBehavior = jsonResult.JsonRequestBehavior;
-                this.MaxJsonLength = jsonResult.MaxJsonLength;
-                this.RecursionLimit = jsonResult.RecursionLimit;
+                ContentEncoding = jsonResult.ContentEncoding;
+                ContentType = jsonResult.ContentType;
+                Data = jsonResult.Data;
+                JsonRequestBehavior = jsonResult.JsonRequestBehavior;
+                MaxJsonLength = jsonResult.MaxJsonLength;
+                RecursionLimit = jsonResult.RecursionLimit;
             }
 
             public override void ExecuteResult(ControllerContext context)
@@ -32,21 +32,21 @@ namespace UniversitySite.Helper
                 if (context == null)
                     throw new ArgumentNullException("context");
 
-                if (this.JsonRequestBehavior == JsonRequestBehavior.DenyGet
-                    && String.Equals(context.HttpContext.Request.HttpMethod, "GET", StringComparison.OrdinalIgnoreCase))
+                if (JsonRequestBehavior == JsonRequestBehavior.DenyGet
+                    && string.Equals(context.HttpContext.Request.HttpMethod, "GET", StringComparison.OrdinalIgnoreCase))
                     throw new InvalidOperationException("GET not allowed! Change JsonRequestBehavior to AllowGet.");
 
                 var response = context.HttpContext.Response;
 
-                response.ContentType = String.IsNullOrEmpty(this.ContentType) ? "application/json" : this.ContentType;
+                response.ContentType = string.IsNullOrEmpty(ContentType) ? "application/json" : ContentType;
 
-                if (this.ContentEncoding != null)
-                    response.ContentEncoding = this.ContentEncoding;
+                if (ContentEncoding != null)
+                    response.ContentEncoding = ContentEncoding;
 
-                if (this.Data != null)
+                if (Data != null)
                 {
                     var json = JsonConvert.SerializeObject(
-                        this.Data,
+                        Data,
                         new JsonSerializerSettings
                         {
                             ContractResolver = new CamelCasePropertyNamesContractResolver()

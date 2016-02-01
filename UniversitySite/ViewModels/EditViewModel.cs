@@ -7,5 +7,4 @@
 
         public ChangePasswordViewModel ChangePasswordViewModel { get; set; } = new ChangePasswordViewModel();
     }
-
 }

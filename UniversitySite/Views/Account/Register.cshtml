@@ -22,48 +22,52 @@
         <div class="container">
 
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#studentsData">Student</a></li>
-                <li><a data-toggle="tab" href="#professorsData">Professor</a></li>
+                <li class="active">
+                    <a data-toggle="tab" href="#studentsData">Student</a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#professorsData">Professor</a>
+                </li>
 
             </ul>
             <div class="tab-content">
                 <div class="tab-pane" id="professorsData">
 
-                    @using (Html.BeginForm("RegisterProfessor", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "simpleForm" }))
+                    @using (Html.BeginForm("RegisterProfessor", "Account", FormMethod.Post, new {@class = "form-horizontal", role = "form", id = "simpleForm"}))
                     {
                         @Html.AntiForgeryToken()
                         <h4>Create a new account.</h4>
-                        <hr />
-                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <hr/>
+                        @Html.ValidationSummary("", new {@class = "text-danger"})
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Login, new { @class = "col-md-2 control-label" })
+                            @Html.LabelFor(m => m.Login, new {@class = "col-md-2 control-label"})
                             <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.Login, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.Login, new {@class = "form-control"})
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                            @Html.LabelFor(m => m.Password, new {@class = "col-md-2 control-label"})
                             <div class="col-md-10">
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                            @Html.LabelFor(m => m.ConfirmPassword, new {@class = "col-md-2 control-label"})
                             <div class="col-md-10">
-                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "form-control"})
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.ProfessorRegisterVewModel.Name, new { @class = "col-md-2 control-label" })
+                            @Html.LabelFor(m => m.ProfessorRegisterVewModel.Name, new {@class = "col-md-2 control-label"})
                             <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.ProfessorRegisterVewModel.Name, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.ProfessorRegisterVewModel.Name, new {@class = "form-control"})
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(m => m.ProfessorRegisterVewModel.Surname, new { @class = "col-md-2 control-label" })
+                            @Html.LabelFor(m => m.ProfessorRegisterVewModel.Surname, new {@class = "col-md-2 control-label"})
                             <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.ProfessorRegisterVewModel.Surname, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.ProfessorRegisterVewModel.Surname, new {@class = "form-control"})
                             </div>
                         </div>
 
@@ -71,70 +75,73 @@
                         <div class="tab-pane" id="professorsData" data-bind="with: professorRegistrSubjectsListViewModel">
                             <table>
                                 <thead>
-                                    <tr>
-                                        <th>Subjects</th>
-                                        <th />
-                                    </tr>
+                                <tr>
+                                    <th>Subjects</th>
+                                    <th/>
+                                </tr>
                                 </thead>
                                 <tbody data-bind='foreach: subjects'>
-                                    <tr>
-                                        <td><input class='required form-control' data-bind='value: name, attr: { name: "ProfessorRegisterVewModel.Subjects["+$index()+"]"}' /></td>
-                                        <td><a href='#' data-bind='click: $parent.removeSubject'>Delete</a></td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        <input class='required form-control' data-bind='value: name, attr: { name: "ProfessorRegisterVewModel.Subjects["+$index()+"]"}'/>
+                                    </td>
+                                    <td>
+                                        <a href='#' data-bind='click: $parent.removeSubject'>Delete</a>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
 
-                            <br />
+                            <br/>
 
-                            <input type="button" class="btn btn-default" id="btnAddSubject" value="Add" data-bind="click: addSubject" />
-
+                            <input type="button" class="btn btn-default" id="btnAddSubject" value="Add" data-bind="click: addSubject"/>
 
 
                         </div>
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" class="btn btn-default" value="Register" />
+                                <input type="submit" class="btn btn-default" value="Register"/>
                             </div>
                         </div>
                     }
                 </div>
                 <div class="tab-pane active" id="studentsData">
 
-                    @using (Html.BeginForm("RegisterStudent", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    @using (Html.BeginForm("RegisterStudent", "Account", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
                     {
                         @Html.AntiForgeryToken()
                         <h4>Create a new account.</h4>
-                        <hr />
-                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <hr/>
+                        @Html.ValidationSummary("", new {@class = "text-danger"})
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Login, new { @class = "col-md-2 control-label" })
+                            @Html.LabelFor(m => m.Login, new {@class = "col-md-2 control-label"})
                             <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.Login, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.Login, new {@class = "form-control"})
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                            @Html.LabelFor(m => m.Password, new {@class = "col-md-2 control-label"})
                             <div class="col-md-10">
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                            @Html.LabelFor(m => m.ConfirmPassword, new {@class = "col-md-2 control-label"})
                             <div class="col-md-10">
-                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "form-control"})
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.StudentRegisterVewModel.Name, new { @class = "col-md-2 control-label" })
+                            @Html.LabelFor(m => m.StudentRegisterVewModel.Name, new {@class = "col-md-2 control-label"})
                             <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.StudentRegisterVewModel.Name, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.StudentRegisterVewModel.Name, new {@class = "form-control"})
                             </div>
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(m => m.StudentRegisterVewModel.Surname, new { @class = "col-md-2 control-label" })
+                            @Html.LabelFor(m => m.StudentRegisterVewModel.Surname, new {@class = "col-md-2 control-label"})
                             <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.StudentRegisterVewModel.Surname, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.StudentRegisterVewModel.Surname, new {@class = "form-control"})
                             </div>
                         </div>
 
@@ -176,12 +183,11 @@
                             </table>
                         </div>*@
 
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" class="btn btn-default" value="Register" />
-                                </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" class="btn btn-default" value="Register"/>
                             </div>
-
+                        </div>
                     }
                 </div>
 
@@ -190,5 +196,3 @@
 
     </div>
 </div>
-
-

@@ -5,9 +5,9 @@ namespace DTO
 {
     public class Mark
     {
-
         [JsonProperty("id")]
         public Guid Id { get; set; }
+
         [JsonProperty("subject")]
         public Guid Subject { get; set; }
 

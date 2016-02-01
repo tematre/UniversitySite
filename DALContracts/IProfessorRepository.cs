@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Domain.University;
 
 namespace DALContracts
 {
     public interface IProfessorRepository
     {
-
-
-
         IEnumerable<Professor> GetProfessors();
         Professor GetProfessorId(string professorId);
         void InsertProfessor(Professor professor);
@@ -18,6 +14,5 @@ namespace DALContracts
         void AddSubjectForProfessor(Professor professor, Subject subject);
 
         void SaveChanges();
-
     }
 }

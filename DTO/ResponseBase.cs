@@ -7,6 +7,7 @@ namespace DTO
     {
         [JsonProperty("map")]
         public Dictionary<string, object> ObjectsDictionary { get; set; }
+
         [JsonProperty("data")]
         public object Data { get; set; }
     }

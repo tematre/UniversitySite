@@ -2,17 +2,17 @@
 
 
 <div id="editStudentDataDiv">
-    @using (Ajax.BeginForm("EditStudent", "Account", new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnEditedSucess" }, new { @class = "form-horizontal", role = "form" }))
+    @using (Ajax.BeginForm("EditStudent", "Account", new AjaxOptions {HttpMethod = "POST", OnSuccess = "OnEditedSucess"}, new {@class = "form-horizontal", role = "form"}))
     {
         @Html.HiddenFor(a => a.StudentId)
 
         @Html.AntiForgeryToken()
         <h4>Change account data</h4>
-        <hr />
+        <hr/>
         <div class="form-group">
-            @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+            @Html.LabelFor(m => m.Name, new {@class = "col-md-2 control-label"})
             <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = Model.Name })
+                @Html.TextBoxFor(m => m.Name, new {@class = "form-control", placeholder = Model.Name})
             </div>
         </div>
 
@@ -24,54 +24,52 @@
         </div>
         <div class="form-group">
             <div class="col-md-10">
-                <input type="submit" value="Change" class="btn btn-default" />
+                <input type="submit" value="Change" class="btn btn-default"/>
             </div>
         </div>
     }
 </div>
-    <!--div class="form-group">
-        <label class=".col-md-2 .control-label">Choose subject</label>
-        <div class=".col-md-offset-2 .col-md-10">
-            <div class="col-md-4">
+<!--div class="form-group">
+<label class=".col-md-2 .control-label">Choose subject</label>
+<div class=".col-md-offset-2 .col-md-10">
+    <div class="col-md-4">
 
-                <select id="professorSelect" class="form-control" data-bind="options: professors, optionsValue: 'id', optionsText: function(i) { return i.name; }, optionsCaption: 'Choose professor', event: { change: professorSelectionChanged }"></select>
-            </div>
-            <div class="col-md-4">
-                <select id="subjectSelect" class="form-control" data-bind="options: selectedProfessorSubjects, optionsValue: 'id', optionsText: function(i) { return i.name; }, optionsCaption: 'Choose subject', event: { change: subjectSelectionChanged }"></select>
-            </div>
-            <div class="col-md-2">
-                <input type="button" class="btn btn-default" value="Add"
-                       data-bind="click: addSubjectForStudent" />
-            </div>
-        </div>
+        <select id="professorSelect" class="form-control" data-bind="options: professors, optionsValue: 'id', optionsText: function(i) { return i.name; }, optionsCaption: 'Choose professor', event: { change: professorSelectionChanged }"></select>
+    </div>
+    <div class="col-md-4">
+        <select id="subjectSelect" class="form-control" data-bind="options: selectedProfessorSubjects, optionsValue: 'id', optionsText: function(i) { return i.name; }, optionsCaption: 'Choose subject', event: { change: subjectSelectionChanged }"></select>
+    </div>
+    <div class="col-md-2">
+        <input type="button" class="btn btn-default" value="Add"
+               data-bind="click: addSubjectForStudent"/>
+    </div>
+</div>
 
 
-    </div-->
+</div-->
 
-    @if (Model.Subjects != null)
-    {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Subjects</th>
-                    <th>Marks</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var studentSubjectData in Model.Subjects)
-                {
-                    <tr>
-                        <td>@studentSubjectData.Name</td>
-                        <td>
-                            @foreach (var mark in studentSubjectData.Marks)
-                            {
-                                @mark
-                            }
-                        </td>
-                    </tr>
-
-                }
-            </tbody>
-        </table>
-    }
-   
+@if (Model.Subjects != null)
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Subjects</th>
+            <th>Marks</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var studentSubjectData in Model.Subjects)
+        {
+            <tr>
+                <td>@studentSubjectData.Name</td>
+                <td>
+                    @foreach (var mark in studentSubjectData.Marks)
+                    {
+                        @mark
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using Newtonsoft.Json;
 
 namespace UniversitySite.ViewModels
@@ -19,7 +20,7 @@ namespace UniversitySite.ViewModels
     public class SendCodeViewModel
     {
         public string SelectedProvider { get; set; }
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+        public ICollection<SelectListItem> Providers { get; set; }
         public string ReturnUrl { get; set; }
         public bool RememberMe { get; set; }
     }
@@ -32,6 +33,7 @@ namespace UniversitySite.ViewModels
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
+
         public string ReturnUrl { get; set; }
 
         [Display(Name = "Remember this browser?")]
@@ -51,7 +53,6 @@ namespace UniversitySite.ViewModels
     {
         [Required]
         [Display(Name = "Login")]
-      
         public string Email { get; set; }
 
         [Required]
@@ -75,9 +76,10 @@ namespace UniversitySite.ViewModels
         [Display(Name = "Surname")]
         [JsonProperty("surname")]
         public string Surname { get; set; }
-        
+
         public string[] Subjects { get; set; }
     }
+
     public class StudentRegisterVewModel
     {
         [Required]
@@ -109,14 +111,14 @@ namespace UniversitySite.ViewModels
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password",
+            ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
 
         public ProfessorRegisterVewModel ProfessorRegisterVewModel { get; set; }
 
         public StudentRegisterVewModel StudentRegisterVewModel { get; set; }
-        
     }
 
     public class ResetPasswordViewModel
@@ -133,7 +135,8 @@ namespace UniversitySite.ViewModels
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password",
+            ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -145,6 +148,7 @@ namespace UniversitySite.ViewModels
         [Display(Name = "Login")]
         public string Email { get; set; }
     }
+
     public class ChangePasswordViewModel
     {
         [Required]
@@ -160,7 +164,8 @@ namespace UniversitySite.ViewModels
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("NewPassword",
+            ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 }

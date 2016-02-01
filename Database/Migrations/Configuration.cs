@@ -1,11 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace Database.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-    using Database;
-
     internal sealed class Configuration : DbMigrationsConfiguration<UniversityDbContext>
     {
         public Configuration()

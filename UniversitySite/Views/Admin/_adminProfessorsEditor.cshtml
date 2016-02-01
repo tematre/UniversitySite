@@ -1,34 +1,33 @@
-﻿
-<h3>Add subject for professor</h3>
+﻿<h3>Add subject for professor</h3>
 <form role="form" data-bind="with : addSubjectVm">
     <table class="table">
         <thead>
-            <tr>
-                <th>Professor</th>
-                <th>Subject</th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>Professor</th>
+            <th>Subject</th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <select class="form-control" data-bind="options: professors, optionsText: function(i) { return i.surname + ' ' + i.name; },  optionsValue: 'id', optionsCaption: 'Choose..', value : selectedProfessorId"></select>
-                </td>
-                <td>
-                    <input type="text" class="form-control" data-bind="value:subjectName" />
-                </td>
-                <td>
-                    <input type="button" class="btn btn-default"
-                           data-bind="click:function () { addNewSubject(); }" value="Add" />
-                </td>
+        <tr>
+            <td>
+                <select class="form-control" data-bind="options: professors, optionsText: function(i) { return i.surname + ' ' + i.name; },  optionsValue: 'id', optionsCaption: 'Choose..', value : selectedProfessorId"></select>
+            </td>
+            <td>
+                <input type="text" class="form-control" data-bind="value:subjectName"/>
+            </td>
+            <td>
+                <input type="button" class="btn btn-default"
+                       data-bind="click:function () { addNewSubject(); }" value="Add"/>
+            </td>
 
-            </tr>
+        </tr>
         </tbody>
     </table>
 </form>
 
 
-<div class="row" >
+<div class="row">
 
     <div class="row" data-bind="foreach: professors">
         <div class="col-md-12">
@@ -37,27 +36,27 @@
         <div class="col-md-12">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>Subject</th>
-                        <th></th>
-                    </tr>
+                <tr>
+                    <th>Subject</th>
+                    <th></th>
+                </tr>
                 </thead>
-                <tbody data-bind='foreach: subjects'>
-                    <tr >
-                        <td>
-                        <td>
-                            <input type="text" class="btn btn-default"
-                                   data-bind='value: name' />
-                        </td>
-                        <td>
-                            <input type="button" class="btn btn-default"
-                                   data-bind='click: function () { changeSubject($data); }' value="Change" />
-                        </td>
-                        <td>
-                            <input type="button" class="btn btn-default"
-                                   data-bind='click: function () { removeSubject($data); }' value="Remove" />
-                        </td>
-                    </tr>
+                <tbody data-bind="foreach: subjects">
+                <tr >
+                    <td>
+                    <td>
+                        <input type="text" class="btn btn-default"
+                               data-bind="value: name"/>
+                    </td>
+                    <td>
+                        <input type="button" class="btn btn-default"
+                               data-bind="click: function () { changeSubject($data); }" value="Change"/>
+                    </td>
+                    <td>
+                        <input type="button" class="btn btn-default"
+                               data-bind="click: function () { removeSubject($data); }" value="Remove"/>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>

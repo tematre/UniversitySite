@@ -6,7 +6,6 @@ namespace DTO
 {
     public class Student
     {
-
         [JsonProperty("studentId")]
         public string StudentId { get; set; }
 

@@ -1,5 +1,4 @@
-﻿@using System.Web.Mvc.Html
-@using Microsoft.AspNet.Identity
+﻿@using Microsoft.AspNet.Identity
 @model UniversitySite.ViewModels.EditViewModel
 @{
     ViewBag.Title = "Edit";
@@ -8,7 +7,7 @@
 
 
 @section scripts {
-   
+
     @Scripts.Render("~/bundles/knockout")
     @Scripts.Render("/Scripts/jquery.unobtrusive-ajax.js")
     @Scripts.Render("/Scripts/DataTables/jquery.dataTables.js")
@@ -26,25 +25,27 @@
 
 @helper RenderManagingInfo()
 {
-if (Model.Student != null)
-{
+    if (Model.Student != null)
+    {
         @Html.Partial("_editStudent", Model.Student)
-}
-else if (Model.Professor != null)
-{
+    }
+    else if (Model.Professor != null)
+    {
         @Html.Partial("_editProfessor", Model.Professor)
-}
+    }
 }
 @{
     const string colClass = "col-md-6";
 }
 <p class="text-success">@ViewBag.StatusMessage</p>
-<p>You logged in as <strong>@User.Identity.GetUserName()</strong>.</p>
-<div class="row" >
+<p>
+    You logged in as <strong>@User.Identity.GetUserName()</strong>.
+</p>
+<div class="row">
     <div class="@colClass" id="changePasswordDiv">
         @Html.Partial("_changePassword", Model.ChangePasswordViewModel)
     </div>
-    <div class="@colClass" >
+    <div class="@colClass">
         @RenderManagingInfo()
     </div>
 </div>

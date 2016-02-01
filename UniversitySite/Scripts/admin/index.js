@@ -5,6 +5,7 @@
     self.name = ko.observable();
 
 }
+
 function Professor() {
     var self = this;
     self.id = ko.observable();
@@ -22,19 +23,18 @@ var viewModel =
         subjectName: ko.observable()
     },
     professors: ko.observableArray()
-}
-
+};
 
 function changeSubject(subject) {
 
     $.ajax({
-        url: '/Admin/RenameSubject/',
-        type: 'POST',
+        url: "/Admin/RenameSubject/",
+        type: "POST",
         data: {
             id: subject.id,
             name: subject.name
         },
-        success: function () {
+        success: function() {
             loadData();
         }
     });
@@ -42,13 +42,13 @@ function changeSubject(subject) {
 
 function addNewSubject() {
     $.ajax({
-        url: '/Admin/AddSubjectToProfessor/',
-        type: 'POST',
+        url: "/Admin/AddSubjectToProfessor/",
+        type: "POST",
         data: {
             professorId: viewModel.addSubjectVm.selectedProfessorId(),
             subjectName: viewModel.addSubjectVm.subjectName()
         },
-        success: function () {
+        success: function() {
             loadData();
         }
     });
@@ -56,29 +56,28 @@ function addNewSubject() {
 
 function removeSubject(subject) {
     $.ajax({
-        url: '/Admin/RemoveSubject/',
-        type: 'POST',
+        url: "/Admin/RemoveSubject/",
+        type: "POST",
         data: {
             id: subject.id
         },
-        success: function () {
+        success: function() {
             loadData();
         }
     });
 }
 
 
-
 function InitVmFromData(data) {
     viewModel.professors.removeAll();
-    $.each(data.data, function (i, professorSource) {
+    $.each(data.data, function(i, professorSource) {
         var professor = new Professor();
 
         professor.id = professorSource.professorId;
         professor.name = professorSource.name;
         professor.surname = professorSource.surname;
 
-        $.each(professorSource.subjectIds, function (i, subjectId) {
+        $.each(professorSource.subjectIds, function(i, subjectId) {
 
             var subjectSource = data.map[subjectId];
 
@@ -100,9 +99,9 @@ function InitVmFromData(data) {
 function loadData() {
 
     $.ajax({
-        url: '/Account/GetAllProfessors/',
-        type: 'POST',
-        success: function (data) {
+        url: "/Account/GetAllProfessors/",
+        type: "POST",
+        success: function(data) {
             InitVmFromData(data);
             if (!isInit) {
                 ko.applyBindings(viewModel);
@@ -113,7 +112,7 @@ function loadData() {
 }
 
 
-$(document).ready(function () {
+$(document).ready(function() {
     loadData();
 
 

@@ -5,6 +5,7 @@ using DbStudent = Domain.University.Student;
 using DbProfessor = Domain.University.Professor;
 using DbMark = Domain.University.Mark;
 using DbSubject = Domain.University.Subject;
+
 namespace DTO
 {
     public static class MigrationExtension
@@ -16,7 +17,7 @@ namespace DTO
             foreach (var obj in enumerable.SelectMany(a => a.Subjects))
             {
                 dic[obj.Id.ToString()] = obj.ToDto();
-                dic[obj.Professor.Id.ToString()] = obj.Professor.ToDto();
+                dic[obj.Professor.Id] = obj.Professor.ToDto();
             }
 
             foreach (var obj in enumerable.SelectMany(a => a.Marks))
@@ -55,13 +56,13 @@ namespace DTO
 
             foreach (var obj in enumerable.SelectMany(a => a.Subjects).Select(a => a.Professor))
             {
-                dic[obj.Id.ToString()] = obj.ToDto();
+                dic[obj.Id] = obj.ToDto();
             }
             var listOfprofessors = new List<Professor>();
             foreach (var student in enumerable)
             {
                 var dto = student.ToDto();
-                dic[student.Id.ToString()] = dto;
+                dic[student.Id] = dto;
                 listOfprofessors.Add(dto);
             }
 
@@ -71,7 +72,6 @@ namespace DTO
                 Data = listOfprofessors
             };
         }
-
 
 
         public static ResponseBase ToResponse(this DbStudent that)
@@ -89,7 +89,7 @@ namespace DTO
 
             foreach (var obj in that.Subjects.Select(a => a.Professor))
             {
-                dic[obj.Id.ToString()] = obj.ToDto();
+                dic[obj.Id] = obj.ToDto();
             }
 
             dic[that.Id] = that.ToDto();
@@ -99,7 +99,6 @@ namespace DTO
                 ObjectsDictionary = dic,
                 Data = dic[that.Id]
             };
-
         }
 
         public static ResponseBase ToResponse(this DbProfessor that)
@@ -120,16 +119,14 @@ namespace DTO
                 dic[obj.Id.ToString()] = obj.ToDto();
             }
 
-            dic[that.Id.ToString()] = that.ToDto();
-
+            dic[that.Id] = that.ToDto();
 
 
             return new ResponseBase
             {
                 ObjectsDictionary = dic,
-                Data = dic[that.Id.ToString()]
+                Data = dic[that.Id]
             };
-
         }
 
         public static Student ToDto(this DbStudent that)
@@ -148,15 +145,16 @@ namespace DTO
             foreach (var subject in that.Subjects)
             {
                 var marks = that.Marks.Where(a => a.SubjectId == subject.Id).ToArray();
-                var averageMark = ((double)marks.Sum(a => a.Value)) / marks.Length;
+                var averageMark = (double) marks.Sum(a => a.Value)/marks.Length;
 
                 result.AverageMarks[subject.Id.ToString()] = averageMark;
             }
 
-            result.ComonAverageMark = ((double)that.Marks.Sum(a => a.Value)) / that.Marks.Count();
+            result.ComonAverageMark = (double) that.Marks.Sum(a => a.Value)/that.Marks.Count();
 
             return result;
         }
+
         public static Subject ToDto(this DbSubject that)
         {
             return new Subject
@@ -165,7 +163,7 @@ namespace DTO
                 MarkIds = that.Marks.Select(a => a.Id).ToList(),
                 SubjectId = that.Id,
                 StudentIds = that.Students.Select(a => Guid.Parse(a.Id)).ToList(),
-                ProfessorId = that.Professor.Id,
+                ProfessorId = that.Professor.Id
             };
         }
 
@@ -179,6 +177,7 @@ namespace DTO
                 Value = that.Value
             };
         }
+
         public static Professor ToDto(this DbProfessor that)
         {
             return new Professor

@@ -6,7 +6,6 @@ namespace NinjectInitializer
 {
     public static class Initializer
     {
-
         public static void Init(IKernel kernel)
         {
             var service = new UniversityRepository();

@@ -6,7 +6,6 @@ namespace DALContracts
 {
     public interface ISubjectRepository
     {
-
         IEnumerable<Subject> GetSubjects();
         Subject GetSubjectId(Guid subjectId);
         void InsertSubject(Subject subject);
@@ -16,7 +15,5 @@ namespace DALContracts
         void AddMark(Subject subject, Student student, int value);
 
         void SaveChanges();
-
-
     }
 }

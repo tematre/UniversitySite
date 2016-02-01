@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Domain.University;
 
 namespace DALContracts
@@ -15,6 +14,5 @@ namespace DALContracts
         void AddSubjectForStudent(Student student, Subject subject);
         void RemoveSubjectForStudent(Student student, Subject subject);
         void SaveChanges();
-
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using Database.Migrations;
 using Domain.University;
 
 namespace Database
@@ -44,7 +43,6 @@ namespace Database
                 .HasMany(e => e.Subjects)
                 .WithMany(e => e.Students)
                 .Map(m => m.ToTable("StudentsSubjects").MapLeftKey("StudentId").MapRightKey("SubjectId"));
-
 
 
             modelBuilder.Entity<Subject>()

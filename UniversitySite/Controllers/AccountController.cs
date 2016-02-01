@@ -3,24 +3,21 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Domain.Identity;
+using DTO;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using UniversitySite.Helper;
 using UniversitySite.ViewModels;
-
-using DTO;
-
-using Student = Domain.University.Student;
 using Professor = Domain.University.Professor;
+using Student = Domain.University.Student;
 using Subject = Domain.University.Subject;
 
 namespace UniversitySite.Controllers
 {
     public class AccountController : BaseController
     {
-        
-       //
+        //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -43,7 +40,7 @@ namespace UniversitySite.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -53,14 +50,15 @@ namespace UniversitySite.Controllers
                     return View(model);
             }
         }
-        
-       
+
+
         [JsonNetFilter]
         [AllowAnonymous]
         public ActionResult GetAllProfessors()
         {
             return Json(ProfessorRepository.GetProfessors().ToResponse(), JsonRequestBehavior.AllowGet);
         }
+
         [JsonNetFilter]
         [AllowAnonymous]
         public ActionResult GetAllStudents()
@@ -68,7 +66,7 @@ namespace UniversitySite.Controllers
             return Json(StudentRepository.GetStudents().ToResponse(), JsonRequestBehavior.AllowGet);
         }
 
-       
+
         //
         // GET: /Account/Register
         [AllowAnonymous]
@@ -76,6 +74,7 @@ namespace UniversitySite.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -85,19 +84,18 @@ namespace UniversitySite.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var user = new ApplicationUser { UserName = model.Login };
+                    var user = new ApplicationUser {UserName = model.Login};
                     var result = await UserManager.CreateAsync(user, model.Password);
                     await UserManager.AddToRoleAsync(user.Id, Constants.Roles.Student);
                     if (result.Succeeded)
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        await SignInManager.SignInAsync(user, false, false);
 
                         var studentInfo = new Student
                         {
                             Id = user.Id,
                             Name = model.StudentRegisterVewModel.Name,
-                            Surname = model.StudentRegisterVewModel.Surname,
-
+                            Surname = model.StudentRegisterVewModel.Surname
                         };
                         StudentRepository.InsertStudent(studentInfo);
                         if (model.StudentRegisterVewModel.SubjectIds != null)
@@ -108,7 +106,6 @@ namespace UniversitySite.Controllers
 
                                 StudentRepository.AddSubjectForStudent(studentInfo, subject);
                             }
-
                         }
 
 
@@ -124,6 +121,7 @@ namespace UniversitySite.Controllers
             // If we got this far, something failed, redisplay form
             return RedirectToAction("Index", "Home");
         }
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -133,19 +131,18 @@ namespace UniversitySite.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Login, Email = model.Login };
+                var user = new ApplicationUser {UserName = model.Login, Email = model.Login};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 await UserManager.AddToRoleAsync(user.Id, Constants.Roles.Professor);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await SignInManager.SignInAsync(user, false, false);
 
                     var professorInfo = new Professor
                     {
-                        Id =user.Id,
+                        Id = user.Id,
                         Name = model.ProfessorRegisterVewModel.Name,
-                        Surname = model.ProfessorRegisterVewModel.Surname,
-
+                        Surname = model.ProfessorRegisterVewModel.Surname
                     };
 
                     ProfessorRepository.InsertProfessor(professorInfo);
@@ -166,8 +163,6 @@ namespace UniversitySite.Controllers
                     }
 
 
-
-
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -176,7 +171,7 @@ namespace UniversitySite.Controllers
             // If we got this far, something failed, redisplay form
             return RedirectToAction("Index", "Home");
         }
-       
+
 
         public ActionResult Edit()
         {
@@ -207,6 +202,7 @@ namespace UniversitySite.Controllers
 
             return Json(professor.ToResponse(), JsonRequestBehavior.AllowGet);
         }
+
         [JsonNetFilter]
         [AllowAnonymous]
         public JsonResult GetStudentViewModel(string id)
@@ -228,7 +224,6 @@ namespace UniversitySite.Controllers
         }
 
 
-
         public ActionResult AddMarkForStudent(ProfessorViewModel vm)
         {
             return PartialView("_editProfessor", vm);
@@ -245,29 +240,24 @@ namespace UniversitySite.Controllers
         }
 
 
-
         [HttpPost]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(),
-                                                                              vm.OldPassword,
-                                                                              vm.NewPassword);
+                var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(),
+                    vm.OldPassword,
+                    vm.NewPassword);
                 if (result.Succeeded)
                 {
-
                     return PartialView("_changePassword", vm);
                 }
 
                 AddErrors(result);
             }
             return PartialView("_changePassword", vm);
-
         }
 
-
-     
 
         //
         // POST: /Account/LogOff
@@ -301,6 +291,7 @@ namespace UniversitySite.Controllers
         }
 
         #region Helpers
+
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -343,7 +334,7 @@ namespace UniversitySite.Controllers
 
             public override void ExecuteResult(ControllerContext context)
             {
-                var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
+                var properties = new AuthenticationProperties {RedirectUri = RedirectUri};
                 if (UserId != null)
                 {
                     properties.Dictionary[XsrfKey] = UserId;
@@ -351,6 +342,7 @@ namespace UniversitySite.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
+
         #endregion
     }
 }

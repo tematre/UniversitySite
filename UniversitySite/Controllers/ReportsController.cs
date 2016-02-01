@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using DTO;
 using UniversitySite.Helper;
 
@@ -20,6 +16,7 @@ namespace UniversitySite.Controllers
         {
             return View();
         }
+
         public ActionResult AllProfessors()
         {
             return View();
@@ -28,12 +25,13 @@ namespace UniversitySite.Controllers
         [JsonNetFilter]
         public ActionResult GetAllStudents()
         {
-            return Json(StudentRepository.GetStudents().ToResponse(), JsonRequestBehavior.AllowGet);
+            return Json(StudentRepository.GetStudents()?.ToResponse(), JsonRequestBehavior.AllowGet);
         }
+
         [JsonNetFilter]
         public ActionResult GetAllProfessors()
         {
-            return Json(ProfessorRepository.GetProfessors().ToResponse(), JsonRequestBehavior.AllowGet);
+            return Json(ProfessorRepository.GetProfessors()?.ToResponse(), JsonRequestBehavior.AllowGet);
         }
     }
 }

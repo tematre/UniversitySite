@@ -8,7 +8,7 @@ namespace UniversitySite.Models
     public class UsersDbContext : IdentityDbContext<ApplicationUser>
     {
         public UsersDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DefaultConnection", false)
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<UsersDbContext, Configuration>());
         }

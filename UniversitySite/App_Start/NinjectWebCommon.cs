@@ -1,33 +1,35 @@
 ﻿using System;
 using System.Web;
-using DALContracts;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
+using NinjectInitializer;
+using UniversitySite;
 using UniversitySite.Models;
+using WebActivatorEx;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(UniversitySite.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(UniversitySite.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof (NinjectWebCommon), "Start")]
+[assembly: ApplicationShutdownMethod(typeof (NinjectWebCommon), "Stop")]
+
 namespace UniversitySite
 {
-
     public class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
-        /// Starts the application
+        ///     Starts the application
         /// </summary>
         public static void Start()
         {
-            DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
-            DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
+            DynamicModuleUtility.RegisterModule(typeof (OnePerRequestHttpModule));
+            DynamicModuleUtility.RegisterModule(typeof (NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
 
         /// <summary>
-        /// Stops the application.
+        ///     Stops the application.
         /// </summary>
         public static void Stop()
         {
@@ -35,7 +37,7 @@ namespace UniversitySite
         }
 
         /// <summary>
-        /// Creates the kernel that will manage your application.
+        ///     Creates the kernel that will manage your application.
         /// </summary>
         /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
@@ -57,14 +59,14 @@ namespace UniversitySite
         }
 
         /// <summary>
-        /// Load your modules or register your services here!
+        ///     Load your modules or register your services here!
         /// </summary>
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<UsersDbContext>().ToSelf();
 
-            NinjectInitializer.Initializer.Init(kernel);
+            Initializer.Init(kernel);
 
             kernel.Bind<ApplicationSignInManager>().ToMethod(
                 c =>
@@ -72,6 +74,5 @@ namespace UniversitySite
             kernel.Bind<ApplicationUserManager>()
                 .ToMethod(a => HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>());
         }
-
     }
 }

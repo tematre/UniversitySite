@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Database;
 using DALContracts;
 using Domain.University;
 
@@ -9,8 +7,6 @@ namespace DAL
 {
     public partial class UniversityRepository : IProfessorRepository
     {
-
-
         public IEnumerable<Professor> GetProfessors()
         {
             return _db.Professors.ToArray();

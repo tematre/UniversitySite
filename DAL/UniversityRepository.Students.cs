@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Database;
 using DALContracts;
 using Domain.University;
 
@@ -51,6 +49,7 @@ namespace DAL
 
             _db.SaveChanges();
         }
+
         public void RemoveSubjectForStudent(Student student, Subject subject)
         {
             _db.Students.Attach(student);

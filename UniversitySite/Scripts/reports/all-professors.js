@@ -5,7 +5,6 @@
 }
 
 
-
 function IniTable(data) {
 
     var parsed = new Array;
@@ -19,25 +18,25 @@ function IniTable(data) {
         });
     });
 
-    $('#dataTable').DataTable(
+    $("#dataTable").DataTable(
         {
             data: parsed,
             columns: [
                 {
-                    mData: 'name',
+                    mData: "name",
                     "fnRender":
                         function(oObj) {
                             return oObj;
                         }
                 },
                 {
-                    mData: 'subject',
+                    mData: "subject",
                     "fnRender": function(oObj) {
 
                         return oObj;
                     }
                 },
-                { mData: 'studentsCount', "fnRender": function(oObj) { return oObj } }
+                { mData: "studentsCount", "fnRender": function(oObj) { return oObj } }
             ]
         }
     );
@@ -45,14 +44,14 @@ function IniTable(data) {
 }
 
 
-$(document).ready(function () {
+$(document).ready(function() {
 
 
     $.ajax({
-        url: '/Reports/GetAllProfessors/',
-        type: 'GET',
+        url: "/Reports/GetAllProfessors/",
+        type: "GET",
 
-        success: function (data) {
+        success: function(data) {
             IniTable(data);
         }
     });

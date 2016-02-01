@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain.University
 {
     public class Subject
     {
-
         public Subject()
         {
             // ReSharper disable once VirtualMemberCallInContructor
@@ -14,7 +14,7 @@ namespace Domain.University
             Students = new HashSet<Student>();
         }
 
-        public System.Guid Id { get; set; }
+        public Guid Id { get; set; }
 
         [StringLength(40)]
         public string Name { get; set; }

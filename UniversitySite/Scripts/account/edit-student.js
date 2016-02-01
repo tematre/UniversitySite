@@ -2,19 +2,17 @@
 var studentVm = null;
 
 
-function handleJs(data)
-{
+function handleJs(data) {
     studentVm = ko.observable(data);
 }
 
 
-
-$(document).ready(function () {
+$(document).ready(function() {
 
     $.ajax({
-        type: 'GET',
-        url: '/Account/GetStudentViewModel/',
-        success: function (jsonData) {
+        type: "GET",
+        url: "/Account/GetStudentViewModel/",
+        success: function(jsonData) {
             handleJs(jsonData);
         }
     }).done(function() {
@@ -25,5 +23,5 @@ $(document).ready(function () {
 
 
 function OnEditedSucess(data) {
-    
+
 }

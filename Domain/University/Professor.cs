@@ -5,7 +5,6 @@ namespace Domain.University
 {
     public class Professor
     {
-
         public Professor()
         {
             // ReSharper disable once VirtualMemberCallInContructor
@@ -17,6 +16,7 @@ namespace Domain.University
 
         [StringLength(20)]
         public string Name { get; set; }
+
         [StringLength(20)]
         public string Surname { get; set; }
 

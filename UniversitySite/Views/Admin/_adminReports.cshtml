@@ -14,56 +14,60 @@
 }
 
 
-
-
 <div class="container">
 
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#SubjectsThatInludesAllStudents">Report 1</a></li>
-        <li><a data-toggle="tab" href="#StudentsWithGoodAverageMark">Report 2</a></li>
-        <li><a data-toggle="tab" href="#ProfessorsWithMinStudentsCount">Report 3</a></li>
+        <li class="active">
+            <a data-toggle="tab" href="#SubjectsThatInludesAllStudents">Report 1</a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#StudentsWithGoodAverageMark">Report 2</a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#ProfessorsWithMinStudentsCount">Report 3</a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane active" id="SubjectsThatInludesAllStudents">
             <h2>Subjects that inludes all students</h2>
-            <br />
+            <br/>
             <table id="SubjectsThatInludesAllStudentsTable" class="table table-striped">
                 <thead>
-                    <tr>
-                        <th>Professor</th>
-                        <th>Subject</th>
-                    </tr>
+                <tr>
+                    <th>Professor</th>
+                    <th>Subject</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.SubjectsThatInludesAllStudents)
-            {
-                        <tr>
-                            <td>@item.Professor.Name @item.Professor.Surname</td>
-                            <td>@item.Name</td>
-                        </tr>
-                    }
+                @foreach (var item in Model.SubjectsThatInludesAllStudents)
+                {
+                    <tr>
+                        <td>@item.Professor.Name @item.Professor.Surname</td>
+                        <td>@item.Name</td>
+                    </tr>
+                }
                 </tbody>
             </table>
         </div>
 
         <div class="tab-pane" id="StudentsWithGoodAverageMark">
             <h2>Students with good average mark</h2>
-            <br />
+            <br/>
             <table id="StudentsWithGoodAverageMarkTable" class="table table-striped">
                 <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Average mark</th>
-                    </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Average mark</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.StudentsWithGoodAverageMark)
-            {
-                        <tr>
-                            <td>@item.Name @item.Surname</td>
-                            <td>@item.AverageMark</td>
-                        </tr>
-                    }
+                @foreach (var item in Model.StudentsWithGoodAverageMark)
+                {
+                    <tr>
+                        <td>@item.Name @item.Surname</td>
+                        <td>@item.AverageMark</td>
+                    </tr>
+                }
                 </tbody>
             </table>
         </div>
@@ -71,22 +75,22 @@
         <div class="tab-pane" id="ProfessorsWithMinStudentsCount">
 
             <h2>Professors with min students count</h2>
-            <br />
+            <br/>
             <table id="ProfessorsWithMinStudentsCountTable" class="table table-striped">
                 <thead>
-                    <tr>
-                        <th>Surname</th>
-                        <th>Name</th>
-                    </tr>
+                <tr>
+                    <th>Surname</th>
+                    <th>Name</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.ProfessorsWithMinStudentsCount)
-            {
-                        <tr>
-                            <td>@item.Surname</td>
-                            <td>@item.Name</td>
-                        </tr>
-                    }
+                @foreach (var item in Model.ProfessorsWithMinStudentsCount)
+                {
+                    <tr>
+                        <td>@item.Surname</td>
+                        <td>@item.Name</td>
+                    </tr>
+                }
                 </tbody>
             </table>
         </div>

@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.University
 {
+    /// <summary>
+    /// Class that maps to Subjects table
+    /// </summary>
     public class Subject
     {
         public Subject()

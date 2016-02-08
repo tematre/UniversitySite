@@ -17,17 +17,13 @@ namespace UniversitySite.Controllers
 {
     public class AccountController : BaseController
     {
-        //
-        // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
-        //
-        // POST: /Account/Login
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -38,8 +34,6 @@ namespace UniversitySite.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
             switch (result)
             {
@@ -50,7 +44,7 @@ namespace UniversitySite.Controllers
                     return View(model);
             }
         }
-
+        
 
         [JsonNetFilter]
         [AllowAnonymous]
@@ -66,9 +60,7 @@ namespace UniversitySite.Controllers
             return Json(StudentRepository.GetStudents().ToResponse(), JsonRequestBehavior.AllowGet);
         }
 
-
-        //
-        // GET: /Account/Register
+        
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -179,7 +171,7 @@ namespace UniversitySite.Controllers
             var model = new EditViewModel();
             if (User.IsInRole(Constants.Roles.Professor))
             {
-                model.Professor = ProfessorRepository.GetProfessorId(userId).ToViewModel();
+                model.Professor = ProfessorRepository.GetProfessorById(userId).ToViewModel();
             }
             if (User.IsInRole(Constants.Roles.Student))
             {
@@ -198,7 +190,7 @@ namespace UniversitySite.Controllers
         [AllowAnonymous]
         public JsonResult GetProfessorViewModel(string id)
         {
-            var professor = ProfessorRepository.GetProfessorId(id ?? User.Identity.GetUserId());
+            var professor = ProfessorRepository.GetProfessorById(id ?? User.Identity.GetUserId());
 
             return Json(professor.ToResponse(), JsonRequestBehavior.AllowGet);
         }
@@ -215,7 +207,7 @@ namespace UniversitySite.Controllers
 
         public ActionResult EditProfessor(ProfessorViewModel vm)
         {
-            var student = ProfessorRepository.GetProfessorId(vm.ProfessorId);
+            var student = ProfessorRepository.GetProfessorById(vm.ProfessorId);
             student.Name = vm.Name;
             student.Surname = vm.Surname;
             ProfessorRepository.SaveChanges();

@@ -59,7 +59,7 @@ namespace UniversitySite.Controllers
         [AllowAnonymous]
         public ActionResult AddSubjectToProfessor(string professorId, string subjectName)
         {
-            var professor = ProfessorRepository.GetProfessorId(professorId);
+            var professor = ProfessorRepository.GetProfessorById(professorId);
 
             if (professor == null)
             {

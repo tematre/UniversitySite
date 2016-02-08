@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.University
 {
+    /// <summary>
+    /// Class that maps to Professors table
+    /// </summary>
     public class Professor
     {
         public Professor()

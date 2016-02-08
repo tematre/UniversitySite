@@ -5,6 +5,7 @@ using Domain.University;
 
 namespace DAL
 {
+
     public partial class UniversityRepository : IProfessorRepository
     {
         public IEnumerable<Professor> GetProfessors()
@@ -12,7 +13,7 @@ namespace DAL
             return _db.Professors.ToArray();
         }
 
-        public Professor GetProfessorId(string professorId)
+        public Professor GetProfessorById(string professorId)
         {
             return _db.Professors.FirstOrDefault(a => a.Id == professorId);
         }
@@ -25,7 +26,7 @@ namespace DAL
 
         public void DeleteProfessor(string professorId)
         {
-            var professor = GetProfessorId(professorId);
+            var professor = GetProfessorById(professorId);
             if (professor != null)
             {
                 _db.Professors.Remove(professor);

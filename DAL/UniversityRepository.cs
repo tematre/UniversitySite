@@ -3,6 +3,10 @@ using Database;
 
 namespace DAL
 {
+
+    /// <summary>
+    /// There are main repository that implements interfaces to get access for all database entities.
+    /// </summary>
     public partial class UniversityRepository : IDisposable
     {
         private UniversityDbContext _db;
@@ -20,6 +24,7 @@ namespace DAL
                 _db = null;
             }
         }
+
 
         public void SaveChanges()
         {

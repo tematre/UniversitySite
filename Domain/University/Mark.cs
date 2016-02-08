@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.University
 {
+    /// <summary>
+    /// Class that maps to table Marks. You can use it for generate reports.
+    /// </summary>
     public class Mark
     {
         public Guid Id { get; set; }

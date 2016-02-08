@@ -5,6 +5,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Domain.Identity
 {
+    /// <summary>
+    /// Class that maps to Users table in Db
+    /// </summary>
     public class ApplicationUser : IdentityUser
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
